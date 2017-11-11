@@ -1,13 +1,16 @@
-import React                  from 'react'
+import React  , {Component}                from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 
 // import my personal components
-import CurrentlyReadingList   from "./Components/currentlyReadingList.js"
-import WantToReadList         from "./Components/wantToReadList.js"
-import ReadList               from "./Components/readList.js"
+import BookList               from "./Components/book_list"
+import SearchPage             from "./Components/search_bar"
 
-class BooksApp extends React.Component {
+//Import the book API
+import * as BooksAPI     from "./utils/BooksAPI"
+
+
+class BooksApp extends Component {
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -15,49 +18,27 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
+     books:[],
     showSearchPage: false
+
+  }
+
+  // This fucntion will be called by React immediately after the
+//component mounted
+  componentDidMount(){
+    BooksAPI.getAll().then((books) =>{
+      this.setState({books})
+    })
   }
 
   render() {
     return (
+
       <div className="app">
         {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
-              <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-                <input type="text" placeholder="Search by title or author"/>
-
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
+          <SearchPage />
         ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                <CurrentlyReadingList />
-                <WantToReadList />
-                <ReadList />
-              </div>
-            </div>
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-            </div>
-          </div>
+          <BookList books={this.state.books}/>
         )}
       </div>
     )
