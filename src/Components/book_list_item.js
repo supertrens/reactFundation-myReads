@@ -2,10 +2,11 @@ import React , {Component} from 'react'
 import BookshelfChangerOption from "./bookshelf_changer_option"
 
 class BookListItem extends Component{
+
 	render(){
 
-		const { bookElement } =this.props
-    
+		const { bookElement , onChangeOption} =this.props
+
 		const  bookCoverStyle ={
 			width:128 ,
 			height: 192 ,
@@ -17,7 +18,7 @@ class BookListItem extends Component{
 					<div className="book-cover" style={bookCoverStyle}>
 					</div>
 					<div className="book-shelf-changer">
-						<BookshelfChangerOption />
+						<BookshelfChangerOption onChangeOption ={onChangeOption}/>
 					</div>
 				</div>
 

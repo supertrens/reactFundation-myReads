@@ -1,9 +1,12 @@
 import React , {Component} from 'react'
 
 class BookshelfChangerOption extends Component{
+
+
 	render(){
+
 		return(
-	 		<select>
+	 		<select onChange ={(e) => this.props.onChangeOption(e)}>
 		    <option value="none" disabled>Move to...</option>
 		    <option value="currentlyReading">Currently Reading</option>
 		    <option value="wantToRead">Want to Read</option>

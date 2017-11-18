@@ -12,19 +12,8 @@ class ReadList extends Component{
           <ol className="books-grid">
             <li>
               <div className="book">
-                <BookListItem />
+                {/* <BookListItem /> */}
               </div>
-            </li>
-
-           <li>
-             <div className="book">
-               <BookListItem />
-             </div>
-           </li>
-           <li>
-             <div className="book">
-               <BookListItem />
-             </div>
             </li>
          </ol>
         </div>

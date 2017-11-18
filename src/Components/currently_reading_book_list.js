@@ -6,7 +6,7 @@ import BookListItem from './book_list_item'
 class CurrentlyReadingList extends Component{
 
 	render(){
-    const { books} =this.props;
+    const { books}=this.props;
 		return(
 			<div className="bookshelf">
         <h2 className="bookshelf-title">Currently Reading</h2>
