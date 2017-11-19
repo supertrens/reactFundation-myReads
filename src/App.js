@@ -9,51 +9,59 @@ import * as BooksAPI           from "./utils/BooksAPI"
 
 
 class BooksApp extends Component {
-  state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
+  state={
+    //books will contain all the books in the 3 shelves
      books:[],
-    showSearchPage: false
-
+     pageToggle : false
   }
 
-// This fucntion will be called by React immediately after the
-//component mounted
+// This function will be called by React immediately after the
+//component has mounted
   componentDidMount(){
-    BooksAPI.getAll().then((books) =>{
+    BooksAPI.getAll().then((books)=>{
       this.setState({books})
     })
   }
 
-  //remove contact from the contact array
-  moveBook = (book) =>{
+  onAddBookToShelves=(book, e)=>{
+    BooksAPI.search(book).then((books)=>{
+      this.setState((state)=>({
+        //create a brand new array with the new book added from search
+        books : state.books.push(book)
+      }))
+    })
 
-    this.setState((state)=>({
-      //create a brand new array without theobject that we dont need
-      books : state.books.filter((b) => b.id !== book.id)
-    }))
+    // add it to the proper shelf
+    this.onChangeShelfPosition(book , e);
+  }
 
-    //To also remove the contact from the back end server
-//    ContactsAPI.remove(contact);
-  } //End of removeContact
+  onChangeShelfPosition =(bookElement, e) =>{
+    const option = e.target.value;
+  //  BooksAPI.update(bookElement , option);
 
-
+    BooksAPI.update(bookElement , option).then(()=>{
+      window.location.reload()
+    });
+  }
 
   render() {
     return (
-      <div className ="app">
+      <div className="app">
         <Route exact  path="/" render={()=> (
-          <BookList books={this.state.books}/>
+          <BookList
+            books={this.state.books}
+            onChangeShelfPosition={this.onChangeShelfPosition}
+          />
           )}
         />
 
-       <Route exact path='/search' render={() => (
-        <SearchPage books={this.state.books}/>
-        )}/>
+       <Route exact path='/search' render={()=> (
+        <SearchPage
+          books={this.state.books}
+          onAddBookToShelves={this.onAddBookToShelves}
+        />
+        )}
+      />
       </div>
     )
   }

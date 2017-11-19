@@ -5,7 +5,7 @@ class BookListItem extends Component{
 
 	render(){
 
-		const { bookElement , onChangeOption} =this.props
+		const { bookElement , onChangeShelfPosition} =this.props
 
 		const  bookCoverStyle ={
 			width:128 ,
@@ -18,7 +18,10 @@ class BookListItem extends Component{
 					<div className="book-cover" style={bookCoverStyle}>
 					</div>
 					<div className="book-shelf-changer">
-						<BookshelfChangerOption onChangeOption ={onChangeOption}/>
+						<BookshelfChangerOption
+							onChangeShelfPosition={onChangeShelfPosition}
+						  bookElement={bookElement}
+						/>
 					</div>
 				</div>
 

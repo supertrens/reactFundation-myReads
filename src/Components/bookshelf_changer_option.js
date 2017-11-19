@@ -4,10 +4,10 @@ class BookshelfChangerOption extends Component{
 
 
 	render(){
-
+		const {bookElement , onChangeShelfPosition} = this.props;
 		return(
-	 		<select onChange ={(e) => this.props.onChangeOption(e)}>
-		    <option value="none" disabled>Move to...</option>
+	 		<select onChange={(e) => onChangeShelfPosition(bookElement , e)}>
+		    <option value="none">Move to...</option>
 		    <option value="currentlyReading">Currently Reading</option>
 		    <option value="wantToRead">Want to Read</option>
 		    <option value="read">Read</option>

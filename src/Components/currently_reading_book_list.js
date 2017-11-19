@@ -1,24 +1,30 @@
 import React , {Component} from 'react'
 import BookListItem from './book_list_item'
-
+import sortBy from 'sort-by'
 
 
 class CurrentlyReadingList extends Component{
 
 	render(){
-    const { books}=this.props;
+
+    const { books , onChangeShelfPosition}=this.props;
+		//filter the array to get only the CurrentlyReadingList
+		let currentShelf;
+		currentShelf = books.filter((book) => book.shelf === "currentlyReading")
+	  currentShelf.sort(sortBy('title'));
+
 		return(
 			<div className="bookshelf">
         <h2 className="bookshelf-title">Currently Reading</h2>
         <div className="bookshelf-books">
 					{
-						books !==0 &&
+						currentShelf !==0 &&
 						<ol className="books-grid">
 							{
-								books.map((book , index)=>(
-									<li key ={index}>
+								currentShelf.map((book , index)=>(
+									<li key={index}>
 										<div className="book">
-											<BookListItem bookElement={book} />
+											<BookListItem bookElement={book} onChangeShelfPosition={onChangeShelfPosition} />
 										</div>
 									</li>
 								)
