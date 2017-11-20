@@ -1,36 +1,33 @@
-import React , {Component} from 'react'
+import React  from 'react'
 import BookshelfChangerOption from "./bookshelf_changer_option"
 
-class BookListItem extends Component{
+const BookListItem =(props)=>{
 
-	render(){
+			const { bookElement , onChangeShelfPosition} =props
 
-		const { bookElement , onChangeShelfPosition} =this.props
-
-		const  bookCoverStyle ={
-			width:128 ,
-			height: 192 ,
-			backgroundImage: `url(${bookElement.imageLinks.thumbnail})`
-		}
-		return(
-			<div className="book">
-				<div className="book-top">
-					<div className="book-cover" style={bookCoverStyle}>
+			const  bookCoverStyle ={
+				width:128 ,
+				height: 192 ,
+				backgroundImage: `url(${bookElement.imageLinks.thumbnail})`
+			}
+			return(
+				<div className="book">
+					<div className="book-top">
+						<div className="book-cover" style={bookCoverStyle}>
+						</div>
+						<div className="book-shelf-changer">
+							<BookshelfChangerOption
+								onChangeShelfPosition={onChangeShelfPosition}
+							  bookElement={bookElement}
+							/>
+						</div>
 					</div>
-					<div className="book-shelf-changer">
-						<BookshelfChangerOption
-							onChangeShelfPosition={onChangeShelfPosition}
-						  bookElement={bookElement}
-						/>
+
+					<div>
+						<div className="book-title">{bookElement.title}</div>
+						<div className="book-authors">{bookElement.authors}</div>
 					</div>
 				</div>
-
-				<div>
-					<div className="book-title">{bookElement.title}</div>
-					<div className="book-authors">{bookElement.authors}</div>
-				</div>
-			</div>
-		)
-	}
+			)
 }
 export default BookListItem
