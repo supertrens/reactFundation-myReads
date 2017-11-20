@@ -2,7 +2,6 @@ import React from 'react'
 import BookListItem from './book_list_item'
 import sortBy from 'sort-by'
 
-
 const BookInShelf=(props)=>{
 	const { books , onChangeShelfPosition, title , shelfName}=props;
 	//filter the array to get only the CurrentlyReadingList
@@ -18,8 +17,8 @@ const BookInShelf=(props)=>{
 					currentShelf !==0 &&
 					<ol className="books-grid">
 						{
-							currentShelf.map((book , index)=>(
-								<li key={index}>
+							currentShelf.map((book)=>(
+								<li key={book.id}>
 									<div className="book">
 										<BookListItem bookElement={book} onChangeShelfPosition={onChangeShelfPosition} />
 									</div>

@@ -12,7 +12,6 @@ class BooksApp extends Component {
   state={
     //books will contain all the books in the 3 shelves
      books:[],
-     pageToggle : false
   }
 
 // This function will be called by React immediately after the
@@ -23,24 +22,26 @@ class BooksApp extends Component {
     })
   }
 
-  onAddBookToShelves=(book, e)=>{
-    BooksAPI.search(book).then((books)=>{
-      this.setState((state)=>({
-        //create a brand new array with the new book added from search
-        books : state.books.push(book)
-      }))
-    })
-
-    // add it to the proper shelf
-    this.onChangeShelfPosition(book , e);
-  }
+  // onAddBookToShelves=(book, e)=>{
+  //   BooksAPI.search(book).then((books)=>{
+  //     this.setState((state)=>({
+  //       //create a brand new array with the new book added from search
+  //       books : state.books.push(book)
+  //     }))
+  //   })
+  //
+  //   // add it to the proper shelf
+  //   this.onChangeShelfPosition(book , e);
+  // }
 
   onChangeShelfPosition =(bookElement, e) =>{
     const option = e.target.value;
-  //  BooksAPI.update(bookElement , option);
-
-    BooksAPI.update(bookElement , option).then(()=>{
-      window.location.reload()
+    BooksAPI.update(bookElement, option).then(()=>{
+      //let react kow that the data has changed
+      this.componentDidMount()
+    })
+    .catch((error) =>{
+      console.log(error);
     });
   }
 
@@ -57,8 +58,8 @@ class BooksApp extends Component {
 
        <Route exact path='/search' render={()=> (
         <SearchPage
-          books={this.state.books}
-          onAddBookToShelves={this.onAddBookToShelves}
+          booksFromApp={this.state.books}
+          onChangeShelfPosition={this.onChangeShelfPosition}
         />
         )}
       />

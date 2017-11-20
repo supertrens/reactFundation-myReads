@@ -1,7 +1,6 @@
 import React      from 'react'
 import { Link }   from 'react-router-dom'
 
-
 // import my personal components
 import BookInShelf from "./book_in_shelf"
 

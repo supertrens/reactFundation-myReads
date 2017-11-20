@@ -3,8 +3,8 @@ import BookshelfChangerOption from "./bookshelf_changer_option"
 
 const BookListItem =(props)=>{
 
-			const { bookElement , onChangeShelfPosition} =props
-
+			const { bookElement , onChangeShelfPosition , onMoveBookFromList} =props
+			//This is the style that will be apply to each book cover
 			const  bookCoverStyle ={
 				width:128 ,
 				height: 192 ,
@@ -19,6 +19,7 @@ const BookListItem =(props)=>{
 							<BookshelfChangerOption
 								onChangeShelfPosition={onChangeShelfPosition}
 							  bookElement={bookElement}
+								onMoveBookFromList={onMoveBookFromList}
 							/>
 						</div>
 					</div>
