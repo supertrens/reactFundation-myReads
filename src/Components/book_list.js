@@ -1,16 +1,15 @@
-import React      from 'react'
-import { Link }   from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
 // import my personal components
-import BookInShelf from "./book_in_shelf"
+import BookInShelf from "./book_in_shelf";
 
-
-const BookList =(props)=>{
-  const { books , onChangeShelfPosition} =props;
-  return(
+const BookList = props => {
+  const { books, onChangeShelfPosition } = props;
+  return (
     <div className="list-books">
       <div className="list-books-title">
-        <Link  to="/search" className="close-search">
+        <Link to="/search" className="close-search">
           search
         </Link>
         <h1>MyReads</h1>
@@ -41,7 +40,7 @@ const BookList =(props)=>{
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BookList
+export default BookList;
